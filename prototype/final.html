@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Project Tracker — Final Prototype</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    background: linear-gradient(160deg, #fff1f2 0%, #fecdd3 30%, #fda4af 60%, #fbcfe8 100%);
+    color: #1a1a2e;
+    min-height: 100vh;
+    padding: 32px 24px;
+  }
+
+  .app {
+    max-width: 1200px; margin: 0 auto; padding: 40px 32px;
+    min-height: calc(100vh - 64px);
+  }
+
+  /* ── Header ── */
+  header { margin-bottom: 36px; }
+  h1 {
+    font-size: 32px; font-weight: 800;
+    background: linear-gradient(135deg, #be123c, #e11d48, #f43f5e);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .subtitle { color: #6b7280; font-size: 14px; margin-top: 4px; }
+
+  /* ── Stats Bar ── */
+  .stats { display: flex; gap: 14px; margin-bottom: 36px; }
+  .stat {
+    flex: 1; text-align: center; padding: 14px 16px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65));
+    backdrop-filter: blur(8px); border-radius: 16px;
+    border: 1px solid rgba(225,29,72,0.15);
+  }
+  .stat .num { font-size: 24px; font-weight: 700; }
+  .stat .lbl { font-size: 12px; color: #6b7280; font-weight: 500; margin-top: 2px; }
+  .stat.s-all .num { background: linear-gradient(135deg, #be123c, #e11d48); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat.s-active .num { color: #10b981; -webkit-text-fill-color: #10b981; }
+  .stat.s-backlog .num { color: #9ca3af; -webkit-text-fill-color: #9ca3af; }
+  .stat.s-stalled .num { color: #f59e0b; -webkit-text-fill-color: #f59e0b; }
+  .stat.s-completed .num { color: #3b82f6; -webkit-text-fill-color: #3b82f6; }
+
+  /* ── Filters ── */
+  .filter-section { margin-bottom: 24px; }
+  .filter-label {
+    font-size: 11px; font-weight: 600; color: #be123c;
+    text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
+  }
+  .filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-pill {
+    padding: 6px 16px; border-radius: 20px; border: 1px solid rgba(225,29,72,0.15);
+    cursor: pointer; font-size: 13px; font-family: inherit;
+    background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.6));
+    backdrop-filter: blur(4px); color: #4b5563; font-weight: 500;
+    user-select: none; transition: all 0.12s;
+  }
+  .filter-pill:hover { border-color: #e11d48; }
+  .filter-pill.active {
+    background: linear-gradient(135deg, #be123c, #e11d48); color: #fff; border-color: #be123c;
+  }
+  .filter-pill.active-tech {
+    background: linear-gradient(135deg, #9d174d, #db2777); color: #fff; border-color: #9d174d;
+  }
+  .filter-pill.clear {
+    background: transparent; border-color: transparent; color: #9ca3af; font-size: 12px;
+  }
+  .filter-pill.clear:hover { color: #6b7280; }
+
+  /* ── Card Grid ── */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .card {
+    padding: 24px; border-radius: 16px; position: relative;
+    background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65));
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(225,29,72,0.12);
+    border-left: 4px solid #ccc;
+    transition: all 0.15s;
+  }
+  .card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+  .card.s-backlog { border-left-color: #9ca3af; }
+  .card.s-active { border-left-color: #10b981; }
+  .card.s-stalled { border-left-color: #f59e0b; }
+  .card.s-completed { border-left-color: #3b82f6; }
+
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .card h3 { font-size: 16px; font-weight: 600; color: #1a1a2e; }
+
+  .status-badge {
+    font-size: 10px; padding: 3px 10px; border-radius: 10px;
+    font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;
+  }
+  .status-badge.bg-backlog { background: #f3f4f6; color: #6b7280; }
+  .status-badge.bg-active { background: #d1fae5; color: #059669; }
+  .status-badge.bg-stalled { background: #fef3c7; color: #d97706; }
+  .status-badge.bg-completed { background: #dbeafe; color: #2563eb; }
+
+  .card-desc { font-size: 13px; color: #6b7280; margin-bottom: 12px; line-height: 1.5; }
+
+  .card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
+  .card-tags .tag { font-size: 10px; padding: 3px 8px; border-radius: 6px; font-weight: 500; }
+  .card-tags .tag.cat-fun { background: #fae8ff; color: #a21caf; }
+  .card-tags .tag.cat-learning { background: #fff7ed; color: #c2410c; }
+  .card-tags .tag.cat-useful { background: #ecfdf5; color: #059669; }
+  .card-tags .tag.tech { background: #eef2ff; color: #4338ca; }
+
+  .gh-link {
+    margin-top: 12px; padding-top: 12px;
+    border-top: 1px solid rgba(225,29,72,0.1); font-size: 13px;
+  }
+  .gh-link a { color: #be123c; font-weight: 500; text-decoration: none; }
+  .gh-link a:hover { text-decoration: underline; }
+
+  .empty-state { grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: #9ca3af; }
+
+  /* ── Prototype note ── */
+  .proto-note {
+    margin-top: 48px; text-align: center; font-size: 11px; color: #9ca3af;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <div id="app"></div>
+</div>
+
+<script>
+const projects = [
+  { id: 1, title: "Vim Clone", status: "active", category: "fun", tech: ["rust", "terminal"], desc: "Build a terminal-based Vim clone from scratch", github: "namal/vim-clone" },
+  { id: 2, title: "Fractal Art Generation", status: "backlog", category: "fun", tech: ["python", "graphics"], desc: "Procedurally generate fractal art" },
+  { id: 3, title: "OS from Scratch", status: "stalled", category: "learning", tech: ["c", "assembly"], desc: "Write a simple OS kernel", github: "namal/minios" },
+  { id: 4, title: "Tinyrenderer", status: "completed", category: "learning", tech: ["c++", "graphics"], desc: "Software renderer from scratch", github: "namal/tinyrenderer" },
+  { id: 5, title: "CLI Tools in Rust", status: "active", category: "useful", tech: ["rust", "cli"], desc: "Rewrite common CLI tools in Rust", github: "namal/rust-cli-tools" },
+  { id: 6, title: "Game Console Emulator", status: "backlog", category: "fun", tech: ["c++", "emulation"], desc: "Emulate a classic game console" },
+  { id: 7, title: "Holiday Route Planner", status: "backlog", category: "useful", tech: ["python", "maps"], desc: "Plan optimal road trip routes" },
+  { id: 8, title: "Photo Organiser", status: "backlog", category: "useful", tech: ["rust", "cli"], desc: "Deduplicate and organise photos" },
+  { id: 9, title: "Swarm Simulation", status: "stalled", category: "fun", tech: ["python", "simulation"], desc: "Boid flocking swarm simulation" },
+  { id: 10, title: "WinDirStat in Rust", status: "completed", category: "useful", tech: ["rust", "gui"], desc: "Disk space visualiser", github: "namal/dirstat-rs" },
+  { id: 11, title: "Multi-Agent Evolution", status: "backlog", category: "learning", tech: ["python", "ai"], desc: "Evolve agents to solve tasks" },
+  { id: 12, title: "Vim in Godot", status: "active", category: "fun", tech: ["godot", "game"], desc: "Platformer with Vim keybindings", github: "namal/godot-vim-platformer" },
+];
+
+let catFilter = "all";
+let techFilter = null;
+
+function allTechs() {
+  const s = new Set();
+  projects.forEach(p => p.tech.forEach(t => s.add(t)));
+  return [...s].sort();
+}
+
+function filtered() {
+  return projects.filter(p => {
+    if (catFilter !== "all" && p.category !== catFilter) return false;
+    if (techFilter && !p.tech.includes(techFilter)) return false;
+    return true;
+  });
+}
+
+function statusIcon(s) {
+  return { active: "🟢", backlog: "⬜", stalled: "🟡", completed: "✅" }[s] || "⬜";
+}
+
+function render() {
+  const f = filtered();
+  const techs = allTechs();
+  const counts = {
+    all: projects.length,
+    active: projects.filter(p => p.status === "active").length,
+    backlog: projects.filter(p => p.status === "backlog").length,
+    stalled: projects.filter(p => p.status === "stalled").length,
+    completed: projects.filter(p => p.status === "completed").length,
+  };
+  const catCounts = {
+    all: projects.length,
+    fun: projects.filter(p => p.category === "fun").length,
+    learning: projects.filter(p => p.category === "learning").length,
+    useful: projects.filter(p => p.category === "useful").length,
+  };
+
+  let html = "";
+
+  // Header
+  html += `<header><h1>Project Tracker</h1><div class="subtitle">${projects.length} projects · ${counts.active} active · ${counts.completed} completed</div></header>`;
+
+  // Stats
+  html += `<div class="stats">
+    <div class="stat s-all"><div class="num">${counts.all}</div><div class="lbl">Total</div></div>
+    <div class="stat s-active"><div class="num">${counts.active}</div><div class="lbl">Active</div></div>
+    <div class="stat s-backlog"><div class="num">${counts.backlog}</div><div class="lbl">Backlog</div></div>
+    <div class="stat s-stalled"><div class="num">${counts.stalled}</div><div class="lbl">Stalled</div></div>
+    <div class="stat s-completed"><div class="num">${counts.completed}</div><div class="lbl">Completed</div></div>
+  </div>`;
+
+  // Category filter
+  html += `<div class="filter-section"><div class="filter-label">Category</div><div class="filter-row">`;
+  ["all","fun","learning","useful"].forEach(c => {
+    html += `<span class="filter-pill ${c === catFilter ? 'active' : ''}" onclick="setCat('${c}')">${c.charAt(0).toUpperCase()+c.slice(1)} (${catCounts[c]})</span>`;
+  });
+  html += `</div></div>`;
+
+  // Tech filter
+  html += `<div class="filter-section"><div class="filter-label">Tech Stack</div><div class="filter-row">`;
+  techs.forEach(t => {
+    const c = projects.filter(p => p.tech.includes(t)).length;
+    html += `<span class="filter-pill ${t === techFilter ? 'active-tech' : ''}" onclick="setTech('${t}')">${t} (${c})</span>`;
+  });
+  if (techFilter) html += `<span class="filter-pill clear" onclick="setTech(null)">✕ clear tech filter</span>`;
+  html += `</div></div>`;
+
+  // Cards
+  html += `<div class="card-grid">`;
+  if (f.length === 0) {
+    html += `<div class="empty-state">No projects match these filters</div>`;
+  } else {
+    f.forEach(p => {
+      html += `<div class="card s-${p.status}">
+        <div class="card-header"><h3>${p.title}</h3><span class="status-badge bg-${p.status}">${statusIcon(p.status)} ${p.status}</span></div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="card-tags">
+          <span class="tag cat-${p.category}">${p.category}</span>
+          ${p.tech.map(t => `<span class="tag tech">${t}</span>`).join('')}
+        </div>
+        ${p.github ? `<div class="gh-link">🔗 <a href="https://github.com/${p.github}" target="_blank">${p.github}</a></div>` : ''}
+      </div>`;
+    });
+  }
+  html += `</div>`;
+
+  // Footer note
+  html += `<div class="proto-note">PROTOTYPE · Rose palette + monospace typography</div>`;
+
+  document.getElementById("app").innerHTML = html;
+}
+
+function setCat(c) { catFilter = c; render(); }
+function setTech(t) { techFilter = t; render(); }
+
+render();
+</script>
+</body>
+</html>

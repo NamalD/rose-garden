@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Project Tracker — Refined Prototype</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #f4f5f7; color: #1a1a1a; }
+
+  .app { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  /* ── Header ── */
+  .app header { margin-bottom: 20px; }
+  .app h1 { font-size: 28px; font-weight: 700; }
+  .app .subtitle { color: #666; font-size: 14px; margin-top: 2px; }
+
+  /* ── Stats Bar ── */
+  .stats { display: flex; gap: 12px; margin-bottom: 20px; }
+  .stat {
+    flex: 1; background: #fff; border-radius: 10px; padding: 12px 16px;
+    text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .stat .num { font-size: 22px; font-weight: 700; }
+  .stat .lbl { font-size: 12px; color: #888; margin-top: 2px; }
+  .stat.s-all .num { color: #1a1a2e; }
+  .stat.s-active .num { color: #16a34a; }
+  .stat.s-backlog .num { color: #6b7280; }
+  .stat.s-stalled .num { color: #a16207; }
+  .stat.s-completed .num { color: #2563eb; }
+
+  /* ── Filter Bar ── */
+  .filter-section { margin-bottom: 14px; }
+  .filter-section .filter-label { font-size: 12px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-pill {
+    padding: 5px 14px; border-radius: 20px; border: 1px solid #ddd;
+    background: #fff; cursor: pointer; font-size: 13px; transition: all 0.12s;
+    user-select: none;
+  }
+  .filter-pill:hover { border-color: #888; }
+  .filter-pill.active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+  .filter-pill.active-tech { background: #4338ca; color: #fff; border-color: #4338ca; }
+  .filter-pill.clear {
+    background: transparent; border-color: transparent; color: #999; font-size: 12px;
+  }
+  .filter-pill.clear:hover { color: #555; }
+
+  /* ── Card Grid ── */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+  .card {
+    background: #fff; border-radius: 12px; padding: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.07); transition: box-shadow 0.15s;
+    border-left: 4px solid #ccc; position: relative;
+  }
+  .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .card.s-backlog { border-left-color: #9ca3af; }
+  .card.s-active { border-left-color: #22c55e; }
+  .card.s-stalled { border-left-color: #eab308; }
+  .card.s-completed { border-left-color: #3b82f6; }
+
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+  .card h3 { font-size: 16px; font-weight: 600; }
+  .status-badge {
+    font-size: 11px; padding: 2px 8px; border-radius: 10px;
+    font-weight: 500; text-transform: uppercase; letter-spacing: 0.4px;
+    white-space: nowrap;
+  }
+  .status-badge.bg-backlog { background: #f3f4f6; color: #6b7280; }
+  .status-badge.bg-active { background: #dcfce7; color: #16a34a; }
+  .status-badge.bg-stalled { background: #fef9c3; color: #a16207; }
+  .status-badge.bg-completed { background: #dbeafe; color: #2563eb; }
+
+  .card-desc { font-size: 13px; color: #666; margin-bottom: 10px; line-height: 1.4; }
+
+  .card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+  .card-tags .tag { font-size: 11px; padding: 2px 8px; border-radius: 6px; }
+  .card-tags .tag.cat-fun { background: #fae8ff; color: #a21caf; }
+  .card-tags .tag.cat-learning { background: #fff7ed; color: #c2410c; }
+  .card-tags .tag.cat-useful { background: #ecfdf5; color: #059669; }
+  .card-tags .tag.tech { background: #eef2ff; color: #4338ca; }
+
+  /* ── GitHub Link (editable with autocomplete) ── */
+  .gh-section { margin-top: 10px; padding-top: 10px; border-top: 1px solid #f0f0f0; position: relative; }
+  .gh-display {
+    display: flex; align-items: center; gap: 6px; font-size: 13px;
+    cursor: pointer; color: #2563eb; padding: 4px 8px; border-radius: 6px;
+    transition: background 0.12s;
+  }
+  .gh-display:hover { background: #eff6ff; }
+  .gh-display .hint { color: #999; font-size: 12px; font-style: italic; }
+  .gh-display .edit-icon { font-size: 11px; color: #999; margin-left: auto; opacity: 0; transition: opacity 0.12s; }
+  .gh-display:hover .edit-icon { opacity: 1; }
+
+  .gh-edit { display: none; flex-direction: column; gap: 4px; }
+  .gh-edit.open { display: flex; }
+  .gh-edit .input-row { display: flex; gap: 6px; align-items: center; }
+  .gh-edit input {
+    flex: 1; padding: 6px 10px; border: 1px solid #d1d5db; border-radius: 6px;
+    font-size: 13px; outline: none; font-family: inherit;
+  }
+  .gh-edit input:focus { border-color: #4338ca; box-shadow: 0 0 0 2px rgba(67,56,202,0.15); }
+  .gh-edit .btn {
+    padding: 6px 12px; border-radius: 6px; border: none; font-size: 12px;
+    cursor: pointer; font-weight: 500; font-family: inherit; white-space: nowrap;
+  }
+  .gh-edit .btn.save { background: #4338ca; color: #fff; }
+  .gh-edit .btn.save:hover { background: #3730a3; }
+  .gh-edit .btn.cancel { background: #f3f4f6; color: #555; }
+  .gh-edit .btn.cancel:hover { background: #e5e7eb; }
+
+  /* ── Autocomplete dropdown ── */
+  .ac-wrapper { position: relative; flex: 1; }
+  .ac-dropdown {
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 100;
+    background: #fff; border: 1px solid #d1d5db; border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12); max-height: 200px; overflow-y: auto;
+    margin-top: 2px; display: none;
+  }
+  .ac-dropdown.open { display: block; }
+  .ac-item {
+    display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+    cursor: pointer; font-size: 13px; transition: background 0.08s;
+  }
+  .ac-item:hover, .ac-item.highlighted { background: #f3f4f6; }
+  .ac-item .repo-name { font-weight: 500; color: #1a1a1a; }
+  .ac-item .repo-desc { color: #888; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ac-item .repo-lang {
+    font-size: 10px; padding: 1px 6px; border-radius: 4px;
+    background: #eef2ff; color: #4338ca; margin-left: auto; flex-shrink: 0;
+  }
+  .ac-loading {
+    padding: 12px; text-align: center; color: #888; font-size: 12px;
+  }
+  .ac-header {
+    padding: 6px 12px; font-size: 11px; color: #999; text-transform: uppercase;
+    letter-spacing: 0.5px; border-bottom: 1px solid #f0f0f0; background: #fafafa;
+  }
+
+  /* ── Empty state ── */
+  .empty-state { grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: #888; }
+
+  /* ── Prototype bar ── */
+  .proto-bar {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: #1a1a2e; color: #fff; border-radius: 40px;
+    padding: 10px 20px; display: flex; align-items: center; gap: 16px;
+    z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    font-family: system-ui, sans-serif; font-size: 14px;
+  }
+  .proto-bar .label { min-width: 200px; text-align: center; font-weight: 500; letter-spacing: 0.3px; }
+</style>
+</head>
+</body>
+
+<div id="app"></div>
+
+<script>
+// ── Sample Data ──────────────────────────────────────────────
+const GITHUB_USER = "NamalD";
+
+let projects = [
+  { id: 1, title: "Vim Clone", status: "active", category: "fun", tech: ["rust", "terminal"], desc: "Build a terminal-based Vim clone from scratch", github: "namal/vim-clone" },
+  { id: 2, title: "Fractal Art Generation", status: "backlog", category: "fun", tech: ["python", "graphics"], desc: "Procedurally generate fractal art with configurable parameters" },
+  { id: 3, title: "OS from Scratch", status: "stalled", category: "learning", tech: ["c", "assembly"], desc: "Write a simple OS kernel following tutorials", github: "namal/minios" },
+  { id: 4, title: "Tinyrenderer", status: "completed", category: "learning", tech: ["c++", "graphics"], desc: "Implement a software renderer from scratch", github: "namal/tinyrenderer" },
+  { id: 5, title: "CLI Tools in Rust", status: "active", category: "useful", tech: ["rust", "cli"], desc: "Rewrite common CLI tools in Rust for learning", github: "namal/rust-cli-tools" },
+  { id: 6, title: "Game Console Emulator", status: "backlog", category: "fun", tech: ["c++", "emulation"], desc: "Emulate a classic game console (Game Boy or NES)" },
+  { id: 7, title: "Holiday Route Planner", status: "backlog", category: "useful", tech: ["python", "maps"], desc: "Plan optimal road trip routes with multiple stops" },
+  { id: 8, title: "Photo Organiser", status: "backlog", category: "useful", tech: ["rust", "cli"], desc: "Deduplicate and organise photo collections" },
+  { id: 9, title: "Swarm Simulation", status: "stalled", category: "fun", tech: ["python", "simulation"], desc: "Boid/flock swarm simulation with visualisation" },
+  { id: 10, title: "WinDirStat in Rust", status: "completed", category: "useful", tech: ["rust", "gui"], desc: "Disk space visualiser inspired by WinDirStat", github: "namal/dirstat-rs" },
+  { id: 11, title: "Multi-Agent Evolutionary Algorithm", status: "backlog", category: "learning", tech: ["python", "ai"], desc: "Evolve agents to solve cooperative tasks" },
+  { id: 12, title: "Vim in Godot", status: "active", category: "fun", tech: ["godot", "game"], desc: "Platformer where movement uses Vim keybindings", github: "namal/godot-vim-platformer" },
+];
+
+// ── State ────────────────────────────────────────────────────
+let catFilter = "all";
+let techFilter = null;
+let editingId = null;
+let acState = { repos: [], loading: false, fetched: false, highlightedIdx: -1, query: "" };
+
+// ── GitHub API ───────────────────────────────────────────────
+async function fetchRepos() {
+  if (acState.fetched) return acState.repos;
+  acState.loading = true;
+  acState.fetched = true;
+  render();
+  try {
+    const res = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&sort=updated`);
+    if (!res.ok) throw new Error(`API error: ${res.status}`);
+    const data = await res.json();
+    acState.repos = data.map(r => ({
+      full_name: r.full_name,
+      name: r.name,
+      description: r.description,
+      language: r.language,
+      stars: r.stargazers_count,
+    }));
+  } catch (e) {
+    console.warn("GitHub API fetch failed, using fallback:", e);
+    // Fallback with plausible repos
+    acState.repos = [
+      { full_name: "NamalD/vim-clone", name: "vim-clone", description: "Terminal Vim clone in Rust", language: "Rust", stars: 12 },
+      { full_name: "NamalD/minios", name: "minios", description: "Toy OS kernel", language: "C", stars: 45 },
+      { full_name: "NamalD/tinyrenderer", name: "tinyrenderer", description: "Software renderer", language: "C++", stars: 89 },
+      { full_name: "NamalD/rust-cli-tools", name: "rust-cli-tools", description: "Reimplementing CLI tools in Rust", language: "Rust", stars: 34 },
+      { full_name: "NamalD/dirstat-rs", name: "dirstat-rs", description: "Disk space visualiser", language: "Rust", stars: 23 },
+      { full_name: "NamalD/godot-vim-platformer", name: "godot-vim-platformer", description: "Platformer with Vim keybinds", language: "GDScript", stars: 67 },
+      { full_name: "NamalD/ansible-playbooks", name: "ansible-playbooks", description: "Infrastructure as code", language: "YAML", stars: 8 },
+      { full_name: "NamalD/dotfiles", name: "dotfiles", description: "Personal dotfiles", language: "Shell", stars: 15 },
+      { full_name: "NamalD/site", name: "site", description: "Personal website", language: "Astro", stars: 5 },
+    ];
+  }
+  acState.loading = false;
+  render();
+  return acState.repos;
+}
+
+// ── Derived ──────────────────────────────────────────────────
+function allTechs() {
+  const set = new Set();
+  projects.forEach(p => p.tech.forEach(t => set.add(t)));
+  return [...set].sort();
+}
+
+function filteredProjects() {
+  return projects.filter(p => {
+    if (catFilter !== "all" && p.category !== catFilter) return false;
+    if (techFilter && !p.tech.includes(techFilter)) return false;
+    return true;
+  });
+}
+
+function statusIcon(s) {
+  return { active: "🟢", backlog: "⬜", stalled: "🟡", completed: "✅" }[s] || "⬜";
+}
+
+// ── GitHub link editing ──────────────────────────────────────
+function startEdit(id) {
+  editingId = id;
+  acState.query = "";
+  acState.highlightedIdx = -1;
+  render();
+  // Kick off fetching repos in background
+  fetchRepos();
+  // Focus input after render
+  setTimeout(() => {
+    const input = document.getElementById(`gh-input-${id}`);
+    if (input) input.focus();
+  }, 50);
+}
+
+function cancelEdit() {
+  editingId = null;
+  acState.query = "";
+  acState.highlightedIdx = -1;
+  render();
+}
+
+function saveEdit(id) {
+  const input = document.getElementById(`gh-input-${id}`);
+  if (!input) return;
+  const val = input.value.trim();
+  const p = projects.find(x => x.id === id);
+  if (p) {
+    p.github = val || null;
+  }
+  editingId = null;
+  acState.query = "";
+  acState.highlightedIdx = -1;
+  render();
+}
+
+function onInputChange(id, val) {
+  acState.query = val;
+  acState.highlightedIdx = -1;
+  // Only show autocomplete if we have repos loaded
+  const dropdown = document.getElementById(`ac-dropdown-${id}`);
+  if (dropdown) {
+    const filtered = getFilteredRepos(val);
+    dropdown.classList.toggle("open", filtered.length > 0 && val.length > 0);
+  }
+  render();
+}
+
+function getFilteredRepos(query) {
+  if (!query || query.length === 0) return [];
+  const q = query.toLowerCase();
+  return acState.repos.filter(r =>
+    r.name.toLowerCase().includes(q) || r.full_name.toLowerCase().includes(q)
+  );
+}
+
+function selectRepo(id, repo) {
+  const input = document.getElementById(`gh-input-${id}`);
+  if (input) {
+    input.value = repo.full_name;
+    acState.query = repo.full_name;
+  }
+  const dropdown = document.getElementById(`ac-dropdown-${id}`);
+  if (dropdown) dropdown.classList.remove("open");
+  render();
+}
+
+function handleKey(e, id) {
+  const filtered = getFilteredRepos(acState.query);
+  if (e.key === "Enter") {
+    if (acState.highlightedIdx >= 0 && filtered[acState.highlightedIdx]) {
+      selectRepo(id, filtered[acState.highlightedIdx]);
+      e.preventDefault();
+      return;
+    }
+    saveEdit(id);
+  }
+  if (e.key === "Escape") {
+    cancelEdit();
+  }
+  if (e.key === "ArrowDown") {
+    e.preventDefault();
+    acState.highlightedIdx = Math.min(acState.highlightedIdx + 1, filtered.length - 1);
+    renderDropdown(id);
+  }
+  if (e.key === "ArrowUp") {
+    e.preventDefault();
+    acState.highlightedIdx = Math.max(acState.highlightedIdx - 1, -1);
+    renderDropdown(id);
+  }
+}
+
+function renderDropdown(id) {
+  const dropdown = document.getElementById(`ac-dropdown-${id}`);
+  if (!dropdown) return;
+  const filtered = getFilteredRepos(acState.query);
+  dropdown.classList.toggle("open", filtered.length > 0 && acState.query.length > 0);
+  // The items are already rendered — just update highlighting
+  dropdown.querySelectorAll(".ac-item").forEach((el, i) => {
+    el.classList.toggle("highlighted", i === acState.highlightedIdx);
+    if (i === acState.highlightedIdx) el.scrollIntoView({ block: "nearest" });
+  });
+}
+
+// ── Render ───────────────────────────────────────────────────
+function render() {
+  const filtered = filteredProjects();
+  const techs = allTechs();
+
+  const counts = {
+    all: projects.length,
+    active: projects.filter(p => p.status === "active").length,
+    backlog: projects.filter(p => p.status === "backlog").length,
+    stalled: projects.filter(p => p.status === "stalled").length,
+    completed: projects.filter(p => p.status === "completed").length,
+  };
+
+  const catCounts = {
+    all: projects.length,
+    fun: projects.filter(p => p.category === "fun").length,
+    learning: projects.filter(p => p.category === "learning").length,
+    useful: projects.filter(p => p.category === "useful").length,
+  };
+
+  let html = `<div class="app">`;
+
+  // Header
+  html += `
+    <header>
+      <h1>Project Tracker</h1>
+      <div class="subtitle">${projects.length} projects · ${counts.active} active · ${counts.completed} completed</div>
+    </header>`;
+
+  // Stats bar
+  html += `<div class="stats">
+    <div class="stat s-all"><div class="num">${counts.all}</div><div class="lbl">Total</div></div>
+    <div class="stat s-active"><div class="num">${counts.active}</div><div class="lbl">Active</div></div>
+    <div class="stat s-backlog"><div class="num">${counts.backlog}</div><div class="lbl">Backlog</div></div>
+    <div class="stat s-stalled"><div class="num">${counts.stalled}</div><div class="lbl">Stalled</div></div>
+    <div class="stat s-completed"><div class="num">${counts.completed}</div><div class="lbl">Completed</div></div>
+  </div>`;
+
+  // Category filter
+  html += `<div class="filter-section">
+    <div class="filter-label">Category</div>
+    <div class="filter-row">`;
+  ["all","fun","learning","useful"].forEach(c => {
+    html += `<span class="filter-pill ${c === catFilter ? 'active' : ''}" onclick="setCat('${c}')">${c.charAt(0).toUpperCase()+c.slice(1)} (${catCounts[c]})</span>`;
+  });
+  html += `</div></div>`;
+
+  // Tech filter
+  html += `<div class="filter-section">
+    <div class="filter-label">Tech Stack</div>
+    <div class="filter-row">`;
+  techs.forEach(t => {
+    const count = projects.filter(p => p.tech.includes(t)).length;
+    html += `<span class="filter-pill ${t === techFilter ? 'active-tech' : ''}" onclick="setTech('${t}')">${t} (${count})</span>`;
+  });
+  if (techFilter) {
+    html += `<span class="filter-pill clear" onclick="setTech(null)">✕ clear tech filter</span>`;
+  }
+  html += `</div></div>`;
+
+  // Card grid
+  html += `<div class="card-grid">`;
+  if (filtered.length === 0) {
+    html += `<div class="empty-state">No projects match these filters</div>`;
+  } else {
+    filtered.forEach(p => {
+      const isEditing = editingId === p.id;
+      const filteredRepos = getFilteredRepos(acState.query);
+      const showAc = isEditing && acState.query.length > 0 && filteredRepos.length > 0;
+
+      html += `
+      <div class="card s-${p.status}">
+        <div class="card-header">
+          <h3>${p.title}</h3>
+          <span class="status-badge bg-${p.status}">${statusIcon(p.status)} ${p.status}</span>
+        </div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="card-tags">
+          <span class="tag cat-${p.category}">${p.category}</span>
+          ${p.tech.map(t => `<span class="tag tech">${t}</span>`).join('')}
+        </div>
+        <div class="gh-section">
+          ${isEditing ? `
+            <div class="gh-edit open">
+              <div class="input-row">
+                <div class="ac-wrapper">
+                  <input id="gh-input-${p.id}" type="text" placeholder="Search your GitHub repos..." value="${p.github || acState.query}" oninput="onInputChange(${p.id}, this.value)" onkeydown="handleKey(event, ${p.id})" autocomplete="off" />
+                  <div id="ac-dropdown-${p.id}" class="ac-dropdown ${showAc ? 'open' : ''}">
+                    ${acState.loading ? '<div class="ac-loading">Loading repos...</div>' : ''}
+                    ${!acState.loading ? `
+                      <div class="ac-header">${GITHUB_USER}'s repos</div>
+                      ${filteredRepos.map((r, i) => `
+                        <div class="ac-item ${i === acState.highlightedIdx ? 'highlighted' : ''}" onclick="selectRepo(${p.id}, {full_name:'${r.full_name}',name:'${r.name}',description:'${(r.description||'').replace(/'/g, "\\'")}',language:'${r.language||''}'})">
+                          <span class="repo-name">${r.name}</span>
+                          ${r.description ? `<span class="repo-desc">${r.description.substring(0, 40)}${r.description.length > 40 ? '...' : ''}</span>` : ''}
+                          ${r.language ? `<span class="repo-lang">${r.language}</span>` : ''}
+                        </div>
+                      `).join('')}
+                    ` : ''}
+                  </div>
+                </div>
+                <button class="btn save" onclick="saveEdit(${p.id})">Save</button>
+                <button class="btn cancel" onclick="cancelEdit()">Cancel</button>
+              </div>
+            </div>
+          ` : `
+            <div class="gh-display" onclick="startEdit(${p.id})">
+              ${p.github
+                ? `<span>🔗 ${p.github}</span>`
+                : `<span class="hint">+ Link to GitHub repo</span>`
+              }
+              <span class="edit-icon">✎</span>
+            </div>
+          `}
+        </div>
+      </div>`;
+    });
+  }
+  html += `</div></div>`;
+
+  // Prototype bar
+  html += `
+    <div class="proto-bar">
+      <span class="label">★ Refined — Cards + Stats + Filters + GH Autocomplete</span>
+    </div>`;
+
+  document.getElementById("app").innerHTML = html;
+}
+
+// ── Actions ──────────────────────────────────────────────────
+function setCat(c) { catFilter = c; render(); }
+function setTech(t) { techFilter = t; render(); }
+
+render();
+</script>
+</body>
+</html>
