@@ -1,0 +1,92 @@
+---
+interface Project {
+  status: string;
+}
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects }: Props = Astro.props;
+
+const counts = {
+  total: projects.length,
+  active: projects.filter((p) => p.status === 'active').length,
+  backlog: projects.filter((p) => p.status === 'backlog').length,
+  stalled: projects.filter((p) => p.status === 'stalled').length,
+  completed: projects.filter((p) => p.status === 'completed').length,
+};
+
+const statColors: Record<string, string> = {
+  total: 'var(--color-primary)',
+  active: 'var(--color-active)',
+  backlog: 'var(--color-backlog)',
+  stalled: 'var(--color-stalled)',
+  completed: 'var(--color-completed)',
+};
+
+const statLabels: Record<string, string> = {
+  total: 'Total',
+  active: 'Active',
+  backlog: 'Backlog',
+  stalled: 'Stalled',
+  completed: 'Completed',
+};
+---
+
+<div class="stats-bar">
+  {Object.entries(counts).map(([key, value]) => (
+    <div class="stat-box" key={key}>
+      <span class="stat-number" style={`color:${statColors[key]}`}>{value}</span>
+      <span class="stat-label">{statLabels[key]}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-md);
+    background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-surface-variant) 100%);
+    border: 1px solid var(--color-outline-strong);
+    border-radius: var(--rounded-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xxl);
+  }
+
+  .stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .stat-number {
+    font-family: inherit;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--color-on-surface-variant);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    .stats-bar {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 400px) {
+    .stats-bar {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

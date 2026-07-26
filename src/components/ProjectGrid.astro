@@ -1,0 +1,45 @@
+---
+import ProjectCard from './ProjectCard.astro';
+
+interface Project {
+  id: number;
+  title: string;
+  status: string;
+  category: string;
+  tech: string[];
+  description: string;
+  github: string | null;
+  githubData?: {
+    stars: number;
+    description: string;
+    language: string;
+    lastPush: string;
+  };
+}
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects }: Props = Astro.props;
+---
+
+<div class="project-grid">
+  {projects.map((project) => (
+    <ProjectCard project={project} key={project.id} />
+  ))}
+</div>
+
+<style>
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  @media (max-width: 640px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

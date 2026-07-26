@@ -1,0 +1,169 @@
+---
+import StatusBadge from './StatusBadge.astro';
+
+interface Project {
+  id: number;
+  title: string;
+  status: string;
+  category: string;
+  tech: string[];
+  description: string;
+  github: string | null;
+  githubData?: {
+    stars: number;
+    description: string;
+    language: string;
+    lastPush: string;
+  };
+}
+
+const { project }: { project: Project } = Astro.props;
+
+const statusColors: Record<string, string> = {
+  active: 'var(--color-active)',
+  backlog: 'var(--color-backlog)',
+  stalled: 'var(--color-stalled)',
+  completed: 'var(--color-completed)',
+};
+
+const categoryColors: Record<string, { bg: string; text: string }> = {
+  fun: { bg: 'var(--color-tag-fun-bg)', text: 'var(--color-tag-fun-text)' },
+  learning: { bg: 'var(--color-tag-learning-bg)', text: 'var(--color-tag-learning-text)' },
+  useful: { bg: 'var(--color-tag-useful-bg)', text: 'var(--color-tag-useful-text)' },
+};
+---
+
+<div class="project-card" style={`border-left-color:${statusColors[project.status] || statusColors.backlog}`}>
+  <div class="card-header">
+    <h3 class="card-title">{project.title}</h3>
+    <StatusBadge status={project.status as any} />
+  </div>
+
+  {project.description && (
+    <p class="card-description">{project.description}</p>
+  )}
+
+  {project.githubData && (
+    <div class="card-github">
+      <span class="github-stars">★ {project.githubData.stars}</span>
+      {project.githubData.language && (
+        <span class="github-language">{project.githubData.language}</span>
+      )}
+    </div>
+  )}
+
+  <div class="card-tags">
+    <span
+      class="tag tag-category"
+      style={`background:${categoryColors[project.category]?.bg || 'var(--color-tag-tech-bg)'};color:${categoryColors[project.category]?.text || 'var(--color-tag-tech-text)'}`}
+    >
+      {project.category}
+    </span>
+    {project.tech.map((t) => (
+      <span class="tag tag-tech" key={t}>{t}</span>
+    ))}
+  </div>
+
+  {project.github && (
+    <a
+      class="card-link"
+      href={`https://github.com/${project.github}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {project.github}
+    </a>
+  )}
+</div>
+
+<style>
+  .project-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-outline);
+    border-left: 4px solid;
+    border-radius: var(--rounded-lg);
+    padding: var(--space-xl);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .project-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+
+  .card-title {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-on-surface);
+    line-height: 1.3;
+  }
+
+  .card-description {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-on-surface-variant);
+    line-height: 1.5;
+  }
+
+  .card-github {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    font-size: 12px;
+    color: var(--color-on-surface-variant);
+  }
+
+  .github-stars {
+    font-weight: 500;
+  }
+
+  .github-language::before {
+    content: '● ';
+    color: var(--color-active);
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: var(--rounded-sm);
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .tag-tech {
+    background: var(--color-tag-tech-bg);
+    color: var(--color-tag-tech-text);
+  }
+
+  .card-link {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-primary);
+    word-break: break-all;
+  }
+
+  .card-link:hover {
+    text-decoration: underline;
+  }
+</style>

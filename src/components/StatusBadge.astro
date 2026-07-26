@@ -1,0 +1,42 @@
+---
+interface Props {
+  status: 'active' | 'backlog' | 'stalled' | 'completed';
+}
+
+const { status }: Props = Astro.props;
+
+const labels: Record<string, string> = {
+  active: '● Active',
+  backlog: '○ Backlog',
+  stalled: '◐ Stalled',
+  completed: '● Completed',
+};
+
+const colors: Record<string, { bg: string; text: string }> = {
+  active: { bg: 'var(--color-status-active-bg)', text: 'var(--color-status-active-text)' },
+  backlog: { bg: 'var(--color-status-backlog-bg)', text: 'var(--color-status-backlog-text)' },
+  stalled: { bg: 'var(--color-status-stalled-bg)', text: 'var(--color-status-stalled-text)' },
+  completed: { bg: 'var(--color-status-completed-bg)', text: 'var(--color-status-completed-text)' },
+};
+---
+
+<span
+  class="status-badge"
+  style={`background:${colors[status].bg};color:${colors[status].text}`}
+>
+  {labels[status]}
+</span>
+
+<style>
+  .status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: var(--rounded-md);
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+</style>
