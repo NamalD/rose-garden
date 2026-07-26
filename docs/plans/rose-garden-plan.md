@@ -1,17 +1,17 @@
 ---
-title: Project Tracker - Plan
+title: Rose Garden - Plan
 type: feat
 date: 2026-07-26
 artifact_contract: ce-unified-plan/v1
 artifact_readiness: implementation-ready
 product_contract_source: ce-brainstorm
 execution: code
-origin: docs/plans/project-tracker-plan.md
+origin: docs/plans/rose-garden-plan.md
 ---
 
 ## Goal Capsule
 
-**Objective:** Build a personal static-site project tracker that surfaces what you want to build (wiki ideas) and what you're actively working on (GitHub repos), all in one dashboard with filtering by category and tech stack.
+**Objective:** Build Rose Garden — a personal static-site project tracker that surfaces what you want to build (wiki ideas) and what you're actively working on (GitHub repos), all in one dashboard with filtering by category and tech stack.
 
 **Product authority:** Single-user personal tool — you own the data, the repo, and the decisions.
 
