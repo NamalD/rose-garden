@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StatsBar from '../components/StatsBar.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import projects from '../data/projects.yaml';
+
+const GITHUB_USER = import.meta.env.GITHUB_USER || 'NamalD';
+
+interface Project {
+  id: number;
+  title: string;
+  status: string;
+  category: string;
+  tech: string[];
+  description: string;
+  github: string | null;
+  source: string;
+  githubData?: {
+    stars: number;
+    description: string;
+    language: string;
+    lastPush: string;
+  };
+}
+
+async function fetchGitHubRepo(owner: string, repo: string): Promise<Project['githubData'] | null> {
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
+    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
+      headers: {
+        Accept: 'application/vnd.github+json',
+        'User-Agent': 'rose-garden',
+      },
+      signal: controller.signal,
+    });
+    clearTimeout(timeout);
+
+    if (!res.ok) {
+      console.warn(`GitHub API returned ${res.status} for ${owner}/${repo}`);
+      return null;
+    }
+
+    const data = await res.json();
+    return {
+      stars: data.stargazers_count ?? 0,
+      description: data.description ?? '',
+      language: data.language ?? '',
+      lastPush: data.pushed_at ?? '',
+    };
+  } catch (err) {
+    console.warn(`Failed to fetch GitHub repo ${owner}/${repo}:`, err);
+    return null;
+  }
+}
+
+const projectsWithGitHub = await Promise.all(
+  projects.map(async (p: Project) => {
+    if (!p.github) return p;
+    const [owner, repo] = p.github.split('/');
+    if (!owner || !repo) return p;
+    const githubData = await fetchGitHubRepo(owner, repo);
+    return { ...p, githubData };
+  })
+);
+
+const categories = [...new Set(projectsWithGitHub.map((p) => p.category))];
+const techs = [...new Set(projectsWithGitHub.flatMap((p) => p.tech))].sort();
+
+// Build JSON with careful escaping for safe inline embedding
+const projectsJson = JSON.stringify(projectsWithGitHub);
+---
+
+<BaseLayout title="Rose Garden">
+  <header>
+    <h1 class="site-title">Rose Garden</h1>
+    <p class="site-subtitle">Project ideas & active repos</p>
+  </header>
+
+  <StatsBar projects={projectsWithGitHub} />
+
+  <div class="filter-bar" id="filter-bar">
+    <div class="filter-section">
+      <span class="filter-label">Category</span>
+      <div class="filter-pills">
+        <button class="filter-pill" data-category="">
+          All
+        </button>
+        {categories.map((cat) => (
+          <button class="filter-pill" data-category={cat} key={cat}>
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <span class="filter-label">Tech</span>
+      <div class="filter-pills">
+        {techs.map((tech) => (
+          <button class="filter-pill filter-pill-tech" data-tech={tech} key={tech}>
+            {tech}
+          </button>
+        ))}
+        <button class="filter-pill filter-pill-clear" id="clear-tech" style="display:none">
+          Clear
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ProjectGrid projects={projectsWithGitHub} />
+
+  <div id="empty-state" style="display:none">
+    <p>No projects match the current filters.</p>
+  </div>
+
+  <script type="application/json" id="projects-data" set:html={projectsJson} />
+
+  <script type="module">
+    import { init } from '../scripts/project-filters';
+    const dataEl = document.getElementById('projects-data');
+    if (dataEl) {
+      init(dataEl.textContent || '[]');
+    }
+  </script>
+</BaseLayout>
+
+<style>
+  .site-title {
+    font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-gradient-end) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--space-xs);
+  }
+
+  .site-subtitle {
+    font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-on-surface-variant);
+    margin-bottom: var(--space-xxl);
+  }
+
+  header {
+    margin-bottom: var(--space-xxl);
+  }
+
+  #empty-state {
+    text-align: center;
+    padding: var(--space-xxl);
+    color: var(--color-on-surface-variant);
+    font-size: 14px;
+  }
+</style>
+
+</BaseLayout>

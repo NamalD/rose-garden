@@ -1,0 +1,1083 @@
+# Seeded from wiki on 2026-07-27
+
+---
+
+- id: 1
+  title: "ASCII Rougelike"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/ASCII Rougelike.md"
+
+- id: 2
+  title: "Buddy comedy with Titus Pullo and Lucius Vorenus"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Buddy comedy with Titus Pullo and Lucius Vorenus.md"
+
+- id: 3
+  title: "Build your own X"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Build your own X.md"
+
+- id: 4
+  title: "Capture the flag with movement tech"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Capture the flag with movement tech.md"
+
+- id: 5
+  title: "CodeCrafters"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/CodeCrafters.md"
+
+- id: 6
+  title: "Example usage"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Cooperative music generation.md"
+
+- id: 7
+  title: "Explore architecture with parkour"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Explore architecture with parkour.md"
+
+- id: 8
+  title: "Explore world which is a massive body floating in space"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Explore world which is a massive body floating in space.md"
+
+- id: 9
+  title: "Fractal art generation "
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Fractal art generation .md"
+
+- id: 10
+  title: "Game about third man syndrome"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Game about third man syndrome.md"
+
+- id: 11
+  title: "Game console Emulator"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Game console Emulator.md"
+
+- id: 12
+  title: "Generate ASCII from image"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Generate ASCII from image.md"
+
+- id: 13
+  title: "Generate choral music"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Generate choral music.md"
+
+- id: 14
+  title: "Generate maths function from inputs and outputs"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Generate maths function from inputs and outputs.md"
+
+- id: 15
+  title: "Generational teaching"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Generational teaching.md"
+
+- id: 16
+  title: "Generative art based on git commits or code bases"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Generative art based on git commits or code bases.md"
+
+- id: 17
+  title: "Git clone"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Git clone.md"
+
+- id: 18
+  title: "Hack the box"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Hack the box.md"
+
+- id: 19
+  title: "Hide data in image"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Hide data in image.md"
+
+- id: 20
+  title: "Human in a world of dogs"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Human in a world of dogs.md"
+
+- id: 21
+  title: "IPFS server_client_application"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/IPFS server_client_application.md"
+
+- id: 22
+  title: "JS music making app"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/JS music making app.md"
+
+- id: 23
+  title: "Mathematically describe sounds"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Mathematically describe sounds.md"
+
+- id: 24
+  title: "Mob simulator - agitate crowds and convert key people to a cause"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Mob simulator - agitate crowds and convert key people to a cause.md"
+
+- id: 25
+  title: "Multi agent evolutionary algorithm"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Multi agent evolutionary algorithm.md"
+
+- id: 26
+  title: "Music phrase generation"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Music phrase generation.md"
+
+- id: 27
+  title: "OpenGL from scratch"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/OpenGL from scratch.md"
+
+- id: 28
+  title: "Pattern finding algorithms"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Pattern finding algorithms.md"
+
+- id: 29
+  title: "Portable emulator"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Portable emulator.md"
+
+- id: 30
+  title: "Recipe generation"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Recipe generation.md"
+
+- id: 31
+  title: "Reimplement CLI commands in another language"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Reimplement CLI commands in another language.md"
+
+- id: 32
+  title: "Remake games in various genre in Unity"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Remake games in various genre in Unity.md"
+
+- id: 33
+  title: "RPG character not in full control of body"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/RPG character not in full control of body.md"
+
+- id: 34
+  title: "Rule learning agent"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Rule learning agent.md"
+
+- id: 35
+  title: "Simulate learning maths"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Simulate learning maths.md"
+
+- id: 36
+  title: "Swarm simulation "
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Swarm simulation .md"
+
+- id: 37
+  title: "Tinyrenderer"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Tinyrenderer.md"
+
+- id: 38
+  title: "UI Coach"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/UI Coach.md"
+
+- id: 39
+  title: "Vim clone"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Vim clone.md"
+
+- id: 40
+  title: "Virtual interactive art space with generative music"
+  status: backlog
+  category: fun
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Virtual interactive art space with generative music.md"
+
+- id: 41
+  title: "Wingspan analytics"
+  status: backlog
+  category: fun
+  tech: []
+  description: "Take photo of game board to auto calculate score"
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Wingspan analytics.md"
+
+- id: 42
+  title: "Wingspan Bird encyclopedia"
+  status: backlog
+  category: fun
+  tech: []
+  description: "Develop an app or website that provides detailed information about each bird in the game, with search and filter opti..."
+  github: null
+  source: "wiki/raw/Project ideas 1/Fun/Wingspan Bird encyclopedia.md"
+
+- id: 43
+  title: "Alpine.js"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Alpine.js.md"
+
+- id: 44
+  title: "Ansible"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Ansible.md"
+
+- id: 45
+  title: "Astro"
+  status: backlog
+  category: learning
+  tech: []
+  description: "https://astro.build/"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Astro.md"
+
+- id: 46
+  title: "Blitz JS"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Blitz JS.md"
+
+- id: 47
+  title: "Blockchain"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Blockchain.md"
+
+- id: 48
+  title: "Bloom filter"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Bloom filter.md"
+
+- id: 49
+  title: "Chakra UI"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Chakra UI.md"
+
+- id: 50
+  title: "Clojure"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Clojure.md"
+
+- id: 51
+  title: "Clojurescript"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Clojurescript.md"
+
+- id: 52
+  title: "Crystal lang"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Crystal lang.md"
+
+- id: 53
+  title: "CSS Battle"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/CSS Battle.md"
+
+- id: 54
+  title: "Data marshalling"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Data marshalling.md"
+
+- id: 55
+  title: "Deno"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Deno.md"
+
+- id: 56
+  title: "D lang"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/D lang.md"
+
+- id: 57
+  title: "Earthly"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Earthly.md"
+
+- id: 58
+  title: "Elixir"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Elixir.md"
+
+- id: 59
+  title: "Elm"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Elm.md"
+
+- id: 60
+  title: "Erlang"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Erlang.md"
+
+- id: 61
+  title: "Fast API"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Fast API.md"
+
+- id: 62
+  title: "Front end practice"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Front end practice.md"
+
+- id: 63
+  title: "Genetic algorithm"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Genetic algorithm.md"
+
+- id: 64
+  title: "Godot"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Godot.md"
+
+- id: 65
+  title: "Go"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Go.md"
+
+- id: 66
+  title: "GPU programming "
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/GPU programming .md"
+
+- id: 67
+  title: "GraphQL"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/GraphQL.md"
+
+- id: 68
+  title: "gRPC"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/gRPC.md"
+
+- id: 69
+  title: "Headless UI"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Headless UI.md"
+
+- id: 70
+  title: "Julia"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Julia.md"
+
+- id: 71
+  title: "Loco"
+  status: backlog
+  category: learning
+  tech: []
+  description: "The one-person framework for Rust for side-projects and startups"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Loco.md"
+
+- id: 72
+  title: "MediatR"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/MediatR.md"
+
+- id: 73
+  title: "Microsoft Orleans"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Microsoft Orleans.md"
+
+- id: 74
+  title: "ML5.js"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/ML5.js.md"
+
+- id: 75
+  title: "Mutation testing"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Mutation testing.md"
+
+- id: 76
+  title: "Next.js"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Next.js.md"
+
+- id: 77
+  title: "Operating system"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Operating system.md"
+
+- id: 78
+  title: "PETAL stack app"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/PETAL stack app.md"
+
+- id: 79
+  title: "Pharo"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Pharo.md"
+
+- id: 80
+  title: "Project based learning"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Project based learning.md"
+
+- id: 81
+  title: "Protobuf"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Protobuf.md"
+
+- id: 82
+  title: "Pulumi"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Pulumi.md"
+
+- id: 83
+  title: "PureScript"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/PureScript.md"
+
+- id: 84
+  title: "Racket"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Racket.md"
+
+- id: 85
+  title: "React Exercises"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/React Exercises.md"
+
+- id: 86
+  title: "Reactive programming in .NET"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Reactive programming in .NET.md"
+
+- id: 87
+  title: "Remix for React"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Remix for React.md"
+
+- id: 88
+  title: "Rescript"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Rescript.md"
+
+- id: 89
+  title: "Rust"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Rust.md"
+
+- id: 90
+  title: "Sapper"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Sapper.md"
+
+- id: 91
+  title: "Seam carving"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Seam carving.md"
+
+- id: 92
+  title: "Smalltalk"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Smalltalk.md"
+
+- id: 93
+  title: "Storybook JS"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Storybook JS.md"
+
+- id: 94
+  title: "Style Stage"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Style Stage.md"
+
+- id: 95
+  title: "SurrealDB"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/SurrealDB.md"
+
+- id: 96
+  title: "Svelete"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Svelete.md"
+
+- id: 97
+  title: "Terragrunt"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Terragrunt.md"
+
+- id: 98
+  title: "Terratest"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Terratest.md"
+
+- id: 99
+  title: "Three js"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Three js.md"
+
+- id: 100
+  title: "Unity"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Unity.md"
+
+- id: 101
+  title: "Vertical slice architecture"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Vertical slice architecture.md"
+
+- id: 102
+  title: "WASM"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/WASM.md"
+
+- id: 103
+  title: "Web components"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Web components.md"
+
+- id: 104
+  title: "WebGL"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/WebGL.md"
+
+- id: 105
+  title: "Wren"
+  status: backlog
+  category: learning
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Learning/Wren.md"
+
+- id: 106
+  title: "Classtab mobile app"
+  status: backlog
+  category: useful
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Useful/Classtab mobile app.md"
+
+- id: 107
+  title: "Convert written notes into markdown"
+  status: backlog
+  category: useful
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Useful/Convert written notes into markdown.md"
+
+- id: 108
+  title: "Crash_UI_by_using_fuzzing_for_interactions"
+  status: backlog
+  category: useful
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Useful/Crash_UI_by_using_fuzzing_for_interactions.md"
+
+- id: 109
+  title: "Fuzz API based on an Open API 0spec"
+  status: backlog
+  category: useful
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Useful/Fuzz API based on an Open API 0spec.md"
+
+- id: 110
+  title: "Guitar chord melody arranger"
+  status: backlog
+  category: useful
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Useful/Guitar chord melody arranger.md"
+
+- id: 111
+  title: "Holiday_route_planner"
+  status: backlog
+  category: useful
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Useful/Holiday_route_planner.md"
+
+- id: 112
+  title: "Meta analysis of product reviews"
+  status: backlog
+  category: useful
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Useful/Meta analysis of product reviews.md"
+
+- id: 113
+  title: "Mockup_from_YAML"
+  status: backlog
+  category: useful
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Useful/Mockup_from_YAML.md"
+
+- id: 114
+  title: "Photo_organiser"
+  status: backlog
+  category: useful
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Useful/Photo_organiser.md"
+
+- id: 115
+  title: "Rebuild portfolio in Elm"
+  status: backlog
+  category: useful
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Useful/Rebuild portfolio in Elm.md"
+
+- id: 116
+  title: "Reference images app"
+  status: backlog
+  category: useful
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Useful/Reference images app.md"
+
+- id: 117
+  title: "Stryker_IDE_plugin"
+  status: backlog
+  category: useful
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Useful/Stryker_IDE_plugin.md"
+
+- id: 118
+  title: "Terminal_dashboard_for_Jira_DevOps_Kibana_TODO_etc"
+  status: backlog
+  category: useful
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Useful/Terminal_dashboard_for_Jira_DevOps_Kibana_TODO_etc.md"
+
+- id: 119
+  title: "Typing_test_with_custom_text_old_literature"
+  status: backlog
+  category: useful
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Useful/Typing_test_with_custom_text_old_literature.md"
+
+- id: 120
+  title: "WinDirStat_in_rust"
+  status: backlog
+  category: useful
+  tech: []
+  description: "---"
+  github: null
+  source: "wiki/raw/Project ideas 1/Useful/WinDirStat_in_rust.md"
