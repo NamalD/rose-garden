@@ -46,7 +46,7 @@ echo "Seeding $OUTPUT_FILE from $WIKI_DIR..."
       fi
 
       # Compute relative path from repo root
-      rel_path="${WIKI_DIR/#$HOME\/}"
+      rel_path="${WIKI_DIR/#$HOME\/}/$category/$filename.md"
 
       echo ""
       echo "- id: $id"
