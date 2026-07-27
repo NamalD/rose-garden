@@ -6,7 +6,7 @@ This file gives instructions to coding agents (human or AI) working in this repo
 
 Before writing any code, read these files:
 
-1. **`docs/standards.md`** — codebase standards, conventions, and architecture decisions. Follow these.
+1. **`docs/STANDARDS.md`** — codebase standards, conventions, and architecture decisions. Follow these.
 2. **`docs/plans/rose-garden-plan.md`** — product requirements and stop conditions. Do not build outside the plan.
 3. **`docs/plans/DESIGN.md`** — visual identity, design tokens, and typography.
 
@@ -28,6 +28,6 @@ Before writing any code, read these files:
 
 ## When Stuck
 
-- Re-read `docs/standards.md` and the relevant plan section.
+- Re-read `docs/STANDARDS.md` and the relevant plan section.
 - Check the existing code in `src/` for patterns to follow.
 - If the plan is wrong, stop and discuss before changing code.

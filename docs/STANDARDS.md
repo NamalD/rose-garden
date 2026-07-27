@@ -26,7 +26,7 @@ src/
 scripts/        # One-off bash scripts (seed-from-wiki.sh)
 docs/
   plans/        # Planning artifacts (rose-garden-plan.md, DESIGN.md)
-  standards.md  # This file
+  STANDARDS.md  # This file
 public/         # Static assets copied as-is
 ```
 
@@ -135,5 +135,5 @@ const { title, status } = Astro.props;
 ## Docs & Plans
 
 - `docs/plans/` contains planning artifacts. Do not edit plan files during implementation unless the plan is wrong.
-- `docs/standards.md` (this file) is the source of truth for code style and conventions.
+- `docs/STANDARDS.md` (this file) is the source of truth for code style and conventions.
 - Design tokens and visual identity are documented in `docs/plans/DESIGN.md`.
