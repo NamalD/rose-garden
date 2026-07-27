@@ -192,11 +192,11 @@ metaproj/
 5. Add a minimal `BaseLayout.astro` with the `<slot />` and global style import
 
 **Test Scenarios:**
-- `npm run dev` starts the dev server without errors
-- `npm run build` produces a `dist/` directory with `index.html`
+- `bun run dev` starts the dev server without errors
+- `bun run build` produces a `dist/` directory with `index.html`
 - Opening `dist/index.html` renders a blank page with no console errors
 
-**Verification:** Run `npm run build` and confirm `dist/index.html` exists and contains the Astro boilerplate.
+**Verification:** Run `bun run build` and confirm `dist/index.html` exists and contains the Astro boilerplate.
 
 ---
 
@@ -232,7 +232,7 @@ metaproj/
 - Text is monospace across the page
 - No flash of unstyled content
 
-**Verification:** Run `npm run dev`, open the page, confirm rose gradient background and monospace font.
+**Verification:** Run `bun run dev`, open the page, confirm rose gradient background and monospace font.
 
 ---
 
@@ -353,7 +353,7 @@ All components use CSS classes that map to the global CSS custom properties defi
 - Empty state appears when filters match nothing
 - Stats bar always shows total counts, not filtered counts
 
-**Verification:** Run `npm run dev`, open the page, interact with all filter combinations, confirm correct behavior.
+**Verification:** Run `bun run dev`, open the page, interact with all filter combinations, confirm correct behavior.
 
 ---
 
@@ -390,7 +390,7 @@ All components use CSS classes that map to the global CSS custom properties defi
 - ProjectCard renders GitHub data when available
 - ProjectCard does not show GitHub section when `github` is null
 
-**Verification:** Run `npm run build` with at least one project having a `github` field. Inspect the generated HTML for GitHub data.
+**Verification:** Run `bun run build` with at least one project having a `github` field. Inspect the generated HTML for GitHub data.
 
 ---
 
@@ -418,8 +418,8 @@ All components use CSS classes that map to the global CSS custom properties defi
          - uses: actions/setup-node@v4
            with:
              node-version: 20
-         - run: npm ci
-         - run: npm run build
+         - run: bun install --frozen-lockfile
+         - run: bun run build
            env:
              GITHUB_USER: ${{ vars.GITHUB_USER }}
          - uses: peaceiris/actions-gh-pages@v3
@@ -472,15 +472,15 @@ All components use CSS classes that map to the global CSS custom properties defi
 
 | Command | Purpose | When |
 |---------|---------|------|
-| `npm run dev` | Start dev server for visual verification | After U2, U4, U5 |
-| `npm run build` | Build static site for production | After U6, U7 |
-| `npm run preview` | Preview production build locally | After U7 |
+| `bun run dev` | Start dev server for visual verification | After U2, U4, U5 |
+| `bun run build` | Build static site for production | After U6, U7 |
+| `bun run preview` | Preview production build locally | After U7 |
 | `git push` | Trigger GitHub Action deployment | After U7 |
 | `scripts/seed-from-wiki.sh` | Seed projects.yaml from wiki | U3, U8 |
 
 ### Quality gates
 
-- Build completes without errors (`npm run build` exits 0)
+- Build completes without errors (`bun run build` exits 0)
 - No console warnings in the dev server
 - All filter combinations produce correct results
 - GitHub API failures do not break the build
@@ -490,7 +490,7 @@ All components use CSS classes that map to the global CSS custom properties defi
 
 ## Definition of Done
 
-- [ ] `npm run build` succeeds and produces a `dist/` directory
+- [ ] `bun run build` succeeds and produces a `dist/` directory
 - [ ] Dashboard renders with rose gradient background and monospace typography
 - [ ] All projects from `projects.yaml` appear as cards
 - [ ] Stats bar shows correct counts for all statuses
