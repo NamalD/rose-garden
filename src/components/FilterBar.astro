@@ -26,39 +26,42 @@ const {
     <div class="filter-pills">
       <button
         class={`filter-pill ${activeCategory === null ? 'filter-pill-active-all' : ''}`}
-        onClick={() => onCategoryChange(null)}
-      >
+        onClick={() => onCategoryChange(null)}>
         All
       </button>
-      {categories.map((cat) => (
-        <button
-          class={`filter-pill ${activeCategory === cat ? 'filter-pill-active-' + cat : ''}`}
-          key={cat}
-          onClick={() => onCategoryChange(activeCategory === cat ? null : cat)}
-        >
-          {cat}
-        </button>
-      ))}
+      {
+        categories.map((cat) => (
+          <button
+            class={`filter-pill ${activeCategory === cat ? 'filter-pill-active-' + cat : ''}`}
+            key={cat}
+            onClick={() => onCategoryChange(activeCategory === cat ? null : cat)}>
+            {cat}
+          </button>
+        ))
+      }
     </div>
   </div>
 
   <div class="filter-section">
     <span class="filter-label">Tech</span>
     <div class="filter-pills">
-      {techs.map((tech) => (
-        <button
-          class={`filter-pill filter-pill-tech ${activeTechs.includes(tech) ? 'filter-pill-active-tech' : ''}`}
-          key={tech}
-          onClick={() => onTechChange(tech)}
-        >
-          {tech}
-        </button>
-      ))}
-      {activeTechs.length > 0 && (
-        <button class="filter-pill filter-pill-clear" onClick={onClearTech}>
-          Clear
-        </button>
-      )}
+      {
+        techs.map((tech) => (
+          <button
+            class={`filter-pill filter-pill-tech ${activeTechs.includes(tech) ? 'filter-pill-active-tech' : ''}`}
+            key={tech}
+            onClick={() => onTechChange(tech)}>
+            {tech}
+          </button>
+        ))
+      }
+      {
+        activeTechs.length > 0 && (
+          <button class="filter-pill filter-pill-clear" onClick={onClearTech}>
+            Clear
+          </button>
+        )
+      }
     </div>
   </div>
 </div>
@@ -105,7 +108,10 @@ const {
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease,
+      border-color 0.15s ease;
   }
 
   .filter-pill:hover {
@@ -113,7 +119,11 @@ const {
   }
 
   .filter-pill-active-all {
-    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-gradient-end) 100%);
+    background: linear-gradient(
+      180deg,
+      var(--color-primary) 0%,
+      var(--color-primary-gradient-end) 100%
+    );
     color: #ffffff;
     border-color: transparent;
   }
@@ -137,7 +147,11 @@ const {
   }
 
   .filter-pill-tech.filter-pill-active-tech {
-    background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary-gradient-end) 100%);
+    background: linear-gradient(
+      180deg,
+      var(--color-secondary) 0%,
+      var(--color-secondary-gradient-end) 100%
+    );
     color: #ffffff;
     border-color: transparent;
   }
