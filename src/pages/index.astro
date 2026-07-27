@@ -2,7 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StatsBar from '../components/StatsBar.astro';
 import ProjectGrid from '../components/ProjectGrid.astro';
-import projects from '../data/projects.yaml';
+import projectsRaw from '../data/projects.yaml?raw';
+import yaml from 'js-yaml';
+const projects = yaml.load(projectsRaw) as any[];
 
 const GITHUB_USER = import.meta.env.GITHUB_USER || 'NamalD';
 
