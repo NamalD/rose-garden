@@ -24,6 +24,7 @@ jobs:
       - run: bun run build
         env:
           GITHUB_USER: ${{ vars.GITHUB_USER }}
+      - run: bun run test
       - uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist

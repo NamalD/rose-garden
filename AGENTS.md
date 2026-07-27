@@ -25,6 +25,7 @@ Before writing any code, read these files:
 - Branch from `main`.
 - Open PRs to `main`.
 - Do not push directly to `main`.
+- Commit, push, and open a PR as part of normal work — do not wait to be asked.
 
 ## When Stuck
 

@@ -10,7 +10,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
+    "test": "bun test",
     "seed": "bash scripts/seed-from-wiki.sh"
   },
   "dependencies": {
