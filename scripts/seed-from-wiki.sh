@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-WIKI_DIR="$HOME/wiki/raw/Project ideas 1"
+WIKI_DIR="${1:-$HOME/wiki/raw/Project ideas 1}"
 OUTPUT_FILE="src/data/projects.yaml"
 
 if [ ! -d "$WIKI_DIR" ]; then
@@ -46,7 +46,7 @@ echo "Seeding $OUTPUT_FILE from $WIKI_DIR..."
       fi
 
       # Compute relative path from repo root
-      rel_path="wiki/raw/Project ideas 1/$category/$filename.md"
+      rel_path="${WIKI_DIR/#$HOME\/}"
 
       echo ""
       echo "- id: $id"
