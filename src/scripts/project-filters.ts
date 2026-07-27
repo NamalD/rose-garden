@@ -99,8 +99,21 @@ export function init(projectsJson: string): void {
 
   function syncCategoryPills(): void {
     categoryButtons.forEach((btn) => {
-      const isActive = btn.getAttribute('data-category') === filters.category;
-      btn.classList.toggle('filter-pill-active', isActive);
+      const cat = btn.getAttribute('data-category') || '';
+      const isActive = filters.category === (cat || null);
+      btn.classList.remove(
+        'filter-pill-active',
+        'filter-pill-active-all',
+        'filter-pill-active-fun',
+        'filter-pill-active-learning',
+        'filter-pill-active-useful'
+      );
+      if (isActive) {
+        const activeClass = filters.category
+          ? `filter-pill-active-${filters.category}`
+          : 'filter-pill-active-all';
+        btn.classList.add(activeClass);
+      }
     });
   }
 

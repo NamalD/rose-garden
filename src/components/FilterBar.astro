@@ -25,14 +25,14 @@ const {
     <span class="filter-label">Category</span>
     <div class="filter-pills">
       <button
-        class={`filter-pill ${activeCategory === null ? 'filter-pill-active' : ''}`}
+        class={`filter-pill ${activeCategory === null ? 'filter-pill-active-all' : ''}`}
         onClick={() => onCategoryChange(null)}
       >
         All
       </button>
       {categories.map((cat) => (
         <button
-          class={`filter-pill ${activeCategory === cat ? 'filter-pill-active' : ''}`}
+          class={`filter-pill ${activeCategory === cat ? 'filter-pill-active-' + cat : ''}`}
           key={cat}
           onClick={() => onCategoryChange(activeCategory === cat ? null : cat)}
         >
@@ -112,10 +112,28 @@ const {
     border-color: var(--color-primary);
   }
 
-  .filter-pill-active {
+  .filter-pill-active-all {
     background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-gradient-end) 100%);
     color: #ffffff;
     border-color: transparent;
+  }
+
+  .filter-pill-active-fun {
+    background: var(--color-tag-fun-bg);
+    color: var(--color-tag-fun-text);
+    border-color: var(--color-tag-fun-text);
+  }
+
+  .filter-pill-active-learning {
+    background: var(--color-tag-learning-bg);
+    color: var(--color-tag-learning-text);
+    border-color: var(--color-tag-learning-text);
+  }
+
+  .filter-pill-active-useful {
+    background: var(--color-tag-useful-bg);
+    color: var(--color-tag-useful-text);
+    border-color: var(--color-tag-useful-text);
   }
 
   .filter-pill-tech.filter-pill-active-tech {
