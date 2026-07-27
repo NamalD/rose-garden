@@ -35,12 +35,16 @@ const statLabels: Record<string, string> = {
 ---
 
 <div class="stats-bar">
-  {Object.entries(counts).map(([key, value]) => (
-    <div class="stat-box" key={key}>
-      <span class="stat-number" style={`color:${statColors[key]}`}>{value}</span>
-      <span class="stat-label">{statLabels[key]}</span>
-    </div>
-  ))}
+  {
+    Object.entries(counts).map(([key, value]) => (
+      <div class="stat-box" key={key}>
+        <span class="stat-number" style={`color:${statColors[key]}`}>
+          {value}
+        </span>
+        <span class="stat-label">{statLabels[key]}</span>
+      </div>
+    ))
+  }
 </div>
 
 <style>

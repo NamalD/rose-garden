@@ -21,17 +21,44 @@ interface Filters {
 
 // ── Token maps ─────────────────────────────────────────────────────────
 
-const STATUS_CONFIG: Record<string, { label: string; symbol: string; border: string; bg: string; text: string }> = {
-  active:   { label: 'Active',   symbol: '●', border: 'var(--color-active)',         bg: 'var(--color-status-active-bg)',   text: 'var(--color-status-active-text)' },
-  backlog:  { label: 'Backlog',  symbol: '○', border: 'var(--color-backlog)',        bg: 'var(--color-status-backlog-bg)',  text: 'var(--color-status-backlog-text)' },
-  stalled:  { label: 'Stalled',  symbol: '◐', border: 'var(--color-stalled)',        bg: 'var(--color-status-stalled-bg)',  text: 'var(--color-status-stalled-text)' },
-  completed:{ label: 'Completed',symbol: '●', border: 'var(--color-completed)',      bg: 'var(--color-status-completed-bg)',text: 'var(--color-status-completed-text)' },
+const STATUS_CONFIG: Record<
+  string,
+  { label: string; symbol: string; border: string; bg: string; text: string }
+> = {
+  active: {
+    label: 'Active',
+    symbol: '●',
+    border: 'var(--color-active)',
+    bg: 'var(--color-status-active-bg)',
+    text: 'var(--color-status-active-text)',
+  },
+  backlog: {
+    label: 'Backlog',
+    symbol: '○',
+    border: 'var(--color-backlog)',
+    bg: 'var(--color-status-backlog-bg)',
+    text: 'var(--color-status-backlog-text)',
+  },
+  stalled: {
+    label: 'Stalled',
+    symbol: '◐',
+    border: 'var(--color-stalled)',
+    bg: 'var(--color-status-stalled-bg)',
+    text: 'var(--color-status-stalled-text)',
+  },
+  completed: {
+    label: 'Completed',
+    symbol: '●',
+    border: 'var(--color-completed)',
+    bg: 'var(--color-status-completed-bg)',
+    text: 'var(--color-status-completed-text)',
+  },
 };
 
 const CATEGORY_CONFIG: Record<string, { bg: string; text: string }> = {
-  fun:       { bg: 'var(--color-tag-fun-bg)',       text: 'var(--color-tag-fun-text)' },
-  learning:  { bg: 'var(--color-tag-learning-bg)',   text: 'var(--color-tag-learning-text)' },
-  useful:    { bg: 'var(--color-tag-useful-bg)',     text: 'var(--color-tag-useful-text)' },
+  fun: { bg: 'var(--color-tag-fun-bg)', text: 'var(--color-tag-fun-text)' },
+  learning: { bg: 'var(--color-tag-learning-bg)', text: 'var(--color-tag-learning-text)' },
+  useful: { bg: 'var(--color-tag-useful-bg)', text: 'var(--color-tag-useful-text)' },
 };
 
 // ── Helpers ────────────────────────────────────────────────────────────
@@ -44,7 +71,8 @@ function escapeHtml(text: string): string {
 
 function matchesFilters(project: Project, filters: Filters): boolean {
   const categoryMatch = !filters.category || project.category === filters.category;
-  const techMatch = filters.techs.length === 0 || filters.techs.every((t) => project.tech.includes(t));
+  const techMatch =
+    filters.techs.length === 0 || filters.techs.every((t) => project.tech.includes(t));
   return categoryMatch && techMatch;
 }
 
@@ -59,12 +87,16 @@ function renderProjectCard(project: Project): string {
         <span class="status-badge" style="background:${status.bg};color:${status.text}">${status.symbol} ${status.label}</span>
       </div>
       ${project.description ? `<p class="card-description">${escapeHtml(project.description)}</p>` : ''}
-      ${project.githubData ? `
+      ${
+        project.githubData
+          ? `
         <div class="card-github">
           <span class="github-stars">★ ${project.githubData.stars}</span>
           ${project.githubData.language ? `<span class="github-language">${escapeHtml(project.githubData.language)}</span>` : ''}
         </div>
-      ` : ''}
+      `
+          : ''
+      }
       <div class="card-tags">
         <span class="tag tag-category" style="background:${category.bg};color:${category.text}">${escapeHtml(project.category)}</span>
         ${project.tech.map((t) => `<span class="tag tag-tech">${escapeHtml(t)}</span>`).join('')}
@@ -77,7 +109,7 @@ function renderProjectCard(project: Project): string {
 // ── Main ───────────────────────────────────────────────────────────────
 
 export function init(projectsJson: string): void {
-  const projects: Project[] = JSON.parse(projectsJson);
+  const projects: Project[] = JSON.parse(projectsJson) as Project[];
   const filters: Filters = { category: null, techs: [] };
 
   const grid = document.getElementById('project-grid');
@@ -106,7 +138,7 @@ export function init(projectsJson: string): void {
         'filter-pill-active-all',
         'filter-pill-active-fun',
         'filter-pill-active-learning',
-        'filter-pill-active-useful'
+        'filter-pill-active-useful',
       );
       if (isActive) {
         const activeClass = filters.category

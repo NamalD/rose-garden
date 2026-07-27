@@ -63,7 +63,7 @@ const projectsWithGitHub = await Promise.all(
     if (!owner || !repo) return p;
     const githubData = await fetchGitHubRepo(owner, repo);
     return { ...p, githubData };
-  })
+  }),
 );
 
 const categories = [...new Set(projectsWithGitHub.map((p) => p.category))];
@@ -85,25 +85,27 @@ const projectsJson = JSON.stringify(projectsWithGitHub);
     <div class="filter-section">
       <span class="filter-label">Category</span>
       <div class="filter-pills">
-        <button class="filter-pill filter-pill-active-all" data-category="">
-          All
-        </button>
-        {categories.map((cat) => (
-          <button class="filter-pill" data-category={cat} key={cat}>
-            {cat}
-          </button>
-        ))}
+        <button class="filter-pill filter-pill-active-all" data-category=""> All </button>
+        {
+          categories.map((cat) => (
+            <button class="filter-pill" data-category={cat} key={cat}>
+              {cat}
+            </button>
+          ))
+        }
       </div>
     </div>
 
     <div class="filter-section">
       <span class="filter-label">Tech</span>
       <div class="filter-pills">
-        {techs.map((tech) => (
-          <button class="filter-pill filter-pill-tech" data-tech={tech} key={tech}>
-            {tech}
-          </button>
-        ))}
+        {
+          techs.map((tech) => (
+            <button class="filter-pill filter-pill-tech" data-tech={tech} key={tech}>
+              {tech}
+            </button>
+          ))
+        }
         <button class="filter-pill filter-pill-clear" id="clear-tech" style="display:none">
           Clear
         </button>
@@ -126,124 +128,137 @@ const projectsJson = JSON.stringify(projectsWithGitHub);
       init(dataEl.textContent || '[]');
     }
   </script>
-</BaseLayout>
 
-<style>
-  .site-title {
-    font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
-    font-size: 32px;
-    font-weight: 800;
-    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-gradient-end) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: var(--space-xs);
-  }
+  <style>
+    .site-title {
+      font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+      font-size: 32px;
+      font-weight: 800;
+      background: linear-gradient(
+        180deg,
+        var(--color-primary) 0%,
+        var(--color-primary-gradient-end) 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: var(--space-xs);
+    }
 
-  .site-subtitle {
-    font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--color-on-surface-variant);
-    margin-bottom: var(--space-xxl);
-  }
+    .site-subtitle {
+      font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--color-on-surface-variant);
+      margin-bottom: var(--space-xxl);
+    }
 
-  header {
-    margin-bottom: var(--space-xxl);
-  }
+    header {
+      margin-bottom: var(--space-xxl);
+    }
 
-  #empty-state {
-    text-align: center;
-    padding: var(--space-xxl);
-    color: var(--color-on-surface-variant);
-    font-size: 14px;
-  }
+    #empty-state {
+      text-align: center;
+      padding: var(--space-xxl);
+      color: var(--color-on-surface-variant);
+      font-size: 14px;
+    }
 
-  /* ── Filter bar ── */
-  .filter-bar {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xl);
-    margin-bottom: var(--space-xxl);
-  }
+    /* ── Filter bar ── */
+    .filter-bar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+      margin-bottom: var(--space-xxl);
+    }
 
-  .filter-section {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-  }
+    .filter-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
 
-  .filter-label {
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    color: var(--color-on-surface-variant);
-    text-transform: uppercase;
-  }
+    .filter-label {
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--color-on-surface-variant);
+      text-transform: uppercase;
+    }
 
-  .filter-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-  }
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
 
-  .filter-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: 6px 16px;
-    border-radius: var(--rounded-xl);
-    border: 1px solid var(--color-outline-strong);
-    background: var(--color-surface);
-    color: var(--color-on-surface-variant);
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-  }
+    .filter-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: 6px 16px;
+      border-radius: var(--rounded-xl);
+      border: 1px solid var(--color-outline-strong);
+      background: var(--color-surface);
+      color: var(--color-on-surface-variant);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease;
+    }
 
-  .filter-pill:hover {
-    border-color: var(--color-primary);
-  }
+    .filter-pill:hover {
+      border-color: var(--color-primary);
+    }
 
-  .filter-pill-active-all {
-    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-gradient-end) 100%);
-    color: #ffffff;
-    border-color: transparent;
-  }
+    .filter-pill-active-all {
+      background: linear-gradient(
+        180deg,
+        var(--color-primary) 0%,
+        var(--color-primary-gradient-end) 100%
+      );
+      color: #ffffff;
+      border-color: transparent;
+    }
 
-  .filter-pill-active-fun {
-    background: var(--color-tag-fun-bg);
-    color: var(--color-tag-fun-text);
-    border-color: var(--color-tag-fun-text);
-  }
+    .filter-pill-active-fun {
+      background: var(--color-tag-fun-bg);
+      color: var(--color-tag-fun-text);
+      border-color: var(--color-tag-fun-text);
+    }
 
-  .filter-pill-active-learning {
-    background: var(--color-tag-learning-bg);
-    color: var(--color-tag-learning-text);
-    border-color: var(--color-tag-learning-text);
-  }
+    .filter-pill-active-learning {
+      background: var(--color-tag-learning-bg);
+      color: var(--color-tag-learning-text);
+      border-color: var(--color-tag-learning-text);
+    }
 
-  .filter-pill-active-useful {
-    background: var(--color-tag-useful-bg);
-    color: var(--color-tag-useful-text);
-    border-color: var(--color-tag-useful-text);
-  }
+    .filter-pill-active-useful {
+      background: var(--color-tag-useful-bg);
+      color: var(--color-tag-useful-text);
+      border-color: var(--color-tag-useful-text);
+    }
 
-  .filter-pill-tech.filter-pill-active-tech {
-    background: linear-gradient(180deg, var(--color-secondary) 0%, var(--color-secondary-gradient-end) 100%);
-    color: #ffffff;
-    border-color: transparent;
-  }
+    .filter-pill-tech.filter-pill-active-tech {
+      background: linear-gradient(
+        180deg,
+        var(--color-secondary) 0%,
+        var(--color-secondary-gradient-end) 100%
+      );
+      color: #ffffff;
+      border-color: transparent;
+    }
 
-  .filter-pill-clear {
-    background: transparent;
-    border-color: var(--color-outline);
-    color: var(--color-on-surface-variant);
-    font-size: 12px;
-  }
-</style>
-
+    .filter-pill-clear {
+      background: transparent;
+      border-color: var(--color-outline);
+      color: var(--color-on-surface-variant);
+      font-size: 12px;
+    }
+  </style>
 </BaseLayout>

@@ -33,47 +33,53 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
 };
 ---
 
-<div class="project-card" style={`border-left-color:${statusColors[project.status] || statusColors.backlog}`}>
+<div
+  class="project-card"
+  style={`border-left-color:${statusColors[project.status] || statusColors.backlog}`}>
   <div class="card-header">
     <h3 class="card-title">{project.title}</h3>
     <StatusBadge status={project.status as any} />
   </div>
 
-  {project.description && (
-    <p class="card-description">{project.description}</p>
-  )}
+  {project.description && <p class="card-description">{project.description}</p>}
 
-  {project.githubData && (
-    <div class="card-github">
-      <span class="github-stars">★ {project.githubData.stars}</span>
-      {project.githubData.language && (
-        <span class="github-language">{project.githubData.language}</span>
-      )}
-    </div>
-  )}
+  {
+    project.githubData && (
+      <div class="card-github">
+        <span class="github-stars">★ {project.githubData.stars}</span>
+        {project.githubData.language && (
+          <span class="github-language">{project.githubData.language}</span>
+        )}
+      </div>
+    )
+  }
 
   <div class="card-tags">
     <span
       class="tag tag-category"
-      style={`background:${categoryColors[project.category]?.bg || 'var(--color-tag-tech-bg)'};color:${categoryColors[project.category]?.text || 'var(--color-tag-tech-text)'}`}
-    >
+      style={`background:${categoryColors[project.category]?.bg || 'var(--color-tag-tech-bg)'};color:${categoryColors[project.category]?.text || 'var(--color-tag-tech-text)'}`}>
       {project.category}
     </span>
-    {project.tech.map((t) => (
-      <span class="tag tag-tech" key={t}>{t}</span>
-    ))}
+    {
+      project.tech.map((t) => (
+        <span class="tag tag-tech" key={t}>
+          {t}
+        </span>
+      ))
+    }
   </div>
 
-  {project.github && (
-    <a
-      class="card-link"
-      href={`https://github.com/${project.github}`}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {project.github}
-    </a>
-  )}
+  {
+    project.github && (
+      <a
+        class="card-link"
+        href={`https://github.com/${project.github}`}
+        target="_blank"
+        rel="noopener noreferrer">
+        {project.github}
+      </a>
+    )
+  }
 </div>
 
 <style>
@@ -83,7 +89,9 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
     border-left: 4px solid;
     border-radius: var(--rounded-lg);
     padding: var(--space-xl);
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    transition:
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
