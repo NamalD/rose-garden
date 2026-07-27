@@ -24,7 +24,7 @@ interface Props {
 const { projects }: Props = Astro.props;
 ---
 
-<div class="project-grid">
+<div class="project-grid" id="project-grid">
   {projects.map((project) => (
     <ProjectCard project={project} key={project.id} />
   ))}
